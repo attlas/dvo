@@ -1,0 +1,59 @@
+set DVO_HOME=d:\dvo
+echo off
+set OPERATING_SYSTEM=windows
+set INSTRACTION_SET=i586
+set MEMORY_MODEL=32
+set TOOLSET=msvc-12.0
+set CONFIGURATION=debug
+
+rem /msvc-12.0
+set MSVC_BUILD_ENV=%VS120COMNTOOLS%../../VC/vcvarsall.bat
+set CMAKE_GENERATOR=Visual Studio 12
+
+rem /msvc
+set BUILD_FOLDER_NAME=%TOOLSET%-%CONFIGURATION%
+
+rem /boost
+set DEV2_COMPONENT_HOME=%DVO_HOME%\boost
+set DEV2_BOOST_HOME=%DVO_HOME%\boost
+set BOOST_HOME=%DVO_HOME%\boost
+set BOOST_INCLUDE=%DVO_HOME%\boost
+set BOOST_LIB=%DVO_HOME%\boost/stage/lib
+set ARCHIVE_DEST=%DVO_HOME%
+
+rem /boost-1.62.0
+set DEV2_COMPONENT_HOME=%DVO_HOME%\boost-1.62.0
+set DEV2_BOOST_1_61_0_HOME=%DVO_HOME%\boost-1.62.0
+set BOOST_HOME=%DVO_HOME%\boost-1.62.0
+set BOOST_ROOT=%BOOST_HOME%
+set BOOST_INCLUDE=%DVO_HOME%\boost-1.62.0
+set BOOST_LIB=%DVO_HOME%\boost-1.62.0/stage/lib
+set BOOST_INCLUDEDIR=%BOOST_INCLUDE%
+set BOOST_LIBRARYDIR=%BOOST_LIB% 
+
+
+rem /cmake-3.6.2-win64-x64
+set DEV2_COMPONENT_HOME=%DVO_HOME%\cmake-3.6.2-win64-x64
+set DEV2_CMAKE_3_6_2_WIN64_X64_HOME=%DVO_HOME%\cmake-3.6.2-win64-x64
+set CMAKE_HOME=%DVO_HOME%\cmake-3.6.2-win64-x64
+set CMAKE_EXE=%DVO_HOME%\cmake-3.6.2-win64-x64/bin/cmake.exe
+
+rem /devo/src
+set BUILD_FOLDER_NAME=%TOOLSET%-%CONFIGURATION%
+set BUILD_SRC=./../src
+set BUILD_SOLUTION=dvo.sln
+set BUILD_HOME=%DVO_HOME%\attlas\dvo\src
+set EXECUTE_COMMAND=%DVO_HOME%\attlas\dvo\src/../%BUILD_FOLDER_NAME%/%CONFIGURATION%/dvo.exe
+
+call "%MSVC_BUILD_ENV%"
+
+pushd "%BUILD_HOME%"
+cd ..
+mkdir %BUILD_FOLDER_NAME%
+
+cd %BUILD_FOLDER_NAME%
+"%CMAKE_EXE%" -G "%CMAKE_GENERATOR%" "%BUILD_SRC%"
+msbuild %BUILD_SOLUTION% /p:Configuration=%CONFIGURATION%
+
+popd
+
