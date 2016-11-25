@@ -17,6 +17,7 @@
 
 
 
+#include "debug.hpp"
 #include "base.hpp"
 
 namespace dvo{

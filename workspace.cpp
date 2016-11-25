@@ -11,12 +11,12 @@ namespace dvo{
   workspace::~workspace(){
   }
 
-  void workspace::init(component_ptr comp){
-    this->cursor = comp;
-  }
-
   std::string workspace::getPrompt() const{
     return this->cursor->string();
+  }
+
+  component_ptr  workspace::getCursor() const{
+    return this->cursor;
   }
 
   void workspace::cleanup(){

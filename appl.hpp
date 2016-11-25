@@ -4,6 +4,14 @@ namespace dvo{
 
   class appl : public base<appl>{
   public:
+    //
+    static std::string const dvoVersion;
+    //
+    static appl_ptr create(boost::filesystem::path const home) {
+      appl_ptr a = base_t::create();
+      a->home = home;
+      return a;
+    }
     ///
     bool init(int argc, char* argv[]);
     ///
