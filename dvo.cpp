@@ -2,9 +2,8 @@
 #include "./appl.hpp"
 
 int main(int argc, char* argv[]){
-  std::cout << "Hello world!" << std::endl;
   {
-    dvo::appl_ptr a(dvo::appl::create());
+    dvo::appl_ptr a(dvo::appl::create(boost::filesystem::path("d:/dvo")));
     if (a->init(argc, argv)){
       a->run();
     }
@@ -14,7 +13,5 @@ int main(int argc, char* argv[]){
 #else
   dvo::debug::validate(std::cout);
 #endif
-
-  std::cout << "Bye world!" << std::endl;
   return 0;
 }
